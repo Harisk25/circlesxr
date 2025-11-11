@@ -1,0 +1,11 @@
+{
+    "world": {
+        "name": "Social Interactions",
+        "type": "hub",
+        "imgPath": "./profile.jpg",
+        "description_short": "Some mini games",
+        "description_long": "Participants are faced with a puzzle which they must solve to continue!",
+      "tags": [ "hub", "Escape Room", "Space" ],
+        "supportedDevices": [ "mobile", "desktop", "hmd_3dof", "hmd_6dof" ]
+    }
+}
