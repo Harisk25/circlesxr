@@ -1,0 +1,125 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Circles' head scripts [REQUIRED] -->
+  <circles-start-scripts/>
+
+  <script>
+      AFRAME.registerComponent('testing-events', {
+        init : function() {
+          CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.READY, (e) => {
+              console.log('CIRCLES.EVENTS.READY!');
+          });
+
+          CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.EXPERIENCE_ENTERED, (e) => {
+              console.log('CIRCLES.EVENTS.EXPERIENCE_ENTERED!');
+          });
+
+          CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.PICKUP_OBJECT, (e) => {
+              console.log('CIRCLES.EVENTS.PICKUP_OBJECT! ' + e.detail.id);
+          });
+
+          CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.RELEASE_OBJECT, (e) => {
+              console.log('CIRCLES.EVENTS.RELEASE_OBJECT! ' + e.detail.id);
+          });
+
+          CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.USER_CONNECTED, (e) => {
+              console.log('CIRCLES.EVENTS.USER_CONNECTED! id' + e.detail.id + ' world:' + e.detail.world + ' device:' + e.detail.device);
+          });
+
+          CIRCLES.getCirclesSceneElement().addEventListener(CIRCLES.EVENTS.USER_DISCONNECTED, (e) => {
+              console.log('CIRCLES.EVENTS.USER_DISCONNECTED! id' + e.detail.id + ' world:' + e.detail.world + ' device:' + e.detail.device);
+          });
+        }
+      });
+    </script>
+
+</head>
+<body>
+  <!-- this is used to create our enter UI that creates a 2D overlay to capture a user gesture for sound/mic access etc. -->
+  <circles-start-ui/>
+
+  <!-- a-scene with 'circles-properties' component [REQUIRED] -->
+  <a-scene circles_scene_properties testing-events>
+    <a-assets>
+      <img id='skyMap' src='assets\texture\2148895316.jpg' crossorigin="anonymous">
+      <!-- Circles' built-in assets [REQUIRED] -->
+      <circles-assets/>
+    </a-assets>
+
+    <!-- Circles' built-in manager and avatar [REQUIRED] -->
+    <circles-manager-avatar/>
+
+    <!-- start your code: put your A-frame, Circles XR, and custom components here -->
+    
+    <!-- example "artefact" -->
+      <a-entity id="Artefact-Gem"
+                position="10 1 1" rotation="0 0 0" scale="1 1 1"
+                geometry="primitive:octahedron; radius:0.5;"
+                material="color:rgb(255, 100, 20); roughness:0.2; metalness:0.8;"
+                circles-sphere-env-map="src:#skyMap"
+                circles-artefact="inspectPosition:0 0 0; inspectRotation:0 0 0; inspectScale:0.8 0.8 0.8;
+                                  textRotationY:90.0; labelLookAt:true; descriptionLookAt:true; label_offset:0.0 1.0 0.0; label_arrow_position:down;
+                                  title:[~20-25 chars] Title Front;
+                                  description:[~240-280 chars]  This is the FRONT text that will display when an object is picked up. Adjust scale size and text rotation properties to make more visible.;
+                                  title_back:[~20-25 chars] Title Back;
+                                  description_back:[~240-280 chars] This is the back/secondary text that will display when you rotate the description bubble.;
+                                  description_offset:0 0.5 0;
+                                  desc_arrow_position:down;
+                                  label_text:Gem;"
+                circles-pickup-networked></a-entity> <!-- circles-pickup-networked allows this to be seen and interacted with other players -->
+
+
+    <!-- Table-->
+    <a-entity 
+                geometry="primitive: box; width: 10; height: 10; depth: 1"
+                material="color:rgb(64, 64, 64); roughness:0.2; side: double"
+                position="10 -5 0" rotation="0 90 0" scale="1.5 1 3"></a-entity>></a-entity>
+
+
+    <!-- enviroment-->
+     <a-entity  id="Ground"
+                geometry="primitive: plane; height: 50; width: 50" 
+                material="color:rgb(179, 178, 168); roughness:0.2; side: double"
+                position="0 -5 0" rotation="90 0 0" scale="1 1 1"></a-entity>
+      
+     <a-entity 
+                geometry="primitive: box; width: 50; height: 10; depth: 1"
+                material="color:rgb(179, 178, 168); roughness:0.2; side: double"
+                position="25 -5 0" rotation="0 90 0" scale="1 1 1"></a-entity>></a-entity>
+      
+     <a-entity 
+                geometry="primitive: box; width: 50; height: 10; depth: 1"
+                material="color:rgb(179, 178, 168); roughness:0.2; side: double"
+                position="-25 -5 0" rotation="0 90 0" scale="1 1 1"></a-entity>></a-entity>
+              
+     <a-entity 
+                geometry="primitive: box; width: 50; height: 10; depth: 1"
+                material="color:rgb(179, 178, 168); roughness:0.2; side: double"
+                position="0 -5 25" rotation="0 0 0" scale="1 1 1"></a-entity>></a-entity>
+
+     <a-entity 
+                geometry="primitive: box; width: 50; height: 10; depth: 1"
+                material="color:rgb(179, 178, 168); roughness:0.2; side: double"
+                position="0 -5 -25" rotation="0 0 0" scale="1 1 1"></a-entity>></a-entity>
+
+    <!-- sky and lights -->
+      <a-entity id="sunlight" position="0 20 0" rotation="40 0 0" 
+                light="type:directional; intensity:4; color:#d5e4f5; castShadow:false;"></a-entity>
+      <a-entity light="type:hemisphere; color:#FFFFFF; groundColor:#BCE2F4; intensity:3.0"></a-entity>
+
+      <a-entity id='skyBox'
+                rotation='0 200 0'
+                geometry='primitive:sphere; radius:50; segments-height:24; segments-width:24;'
+                material='shader:flat; src:#skyMap; side:back;'>
+      </a-entity>
+    
+    <!-- end your code: -->
+  </a-scene>
+
+
+
+  <!-- Circles' end scripts [REQUIRED] -->
+  <circles-end-scripts/>
+ </body>
+</html>
